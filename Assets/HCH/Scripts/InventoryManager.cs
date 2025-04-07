@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public GameObject inventory;
+
     public GameObject slotPrefab;
+
+    public GameObject errorPanel;
+    public float PopupErrorDuration = 1f;
 
     public Transform contentParent;
     public RectTransform buyBoxButton;
@@ -17,6 +22,7 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         InitInventory();
+        errorPanel.SetActive(false);
     }
 
     void InitInventory()
@@ -37,5 +43,22 @@ public class InventoryManager : MonoBehaviour
         newSlot.transform.SetSiblingIndex(insertIndex);
 
         slotList.Add(newSlot);
+    }
+
+    public void PopupError()
+    {
+        StartCoroutine(ShowErrorPopupForSeconds(1f));
+    }
+
+    IEnumerator ShowErrorPopupForSeconds(float seconds)
+    {
+        errorPanel.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        errorPanel.SetActive(false);
+    }
+
+    public void CloseInventory()
+    {
+        inventory.SetActive(false);
     }
 }
