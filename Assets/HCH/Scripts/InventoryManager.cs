@@ -25,6 +25,14 @@ public class InventoryManager : MonoBehaviour
         errorPanel.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            PopupError();
+        }
+    }
+
     void InitInventory()
     {
         for (int i = 0; i < startingSlots; i++)
